@@ -1,0 +1,17 @@
+      Products nghĩa là gì? Trong bảng products gồm những thuộc tính nào?
+-	Products có nghĩa là sản phẩm. Để xây dựng được 1 trang web bán linh kiện đầy đủ, chúng ta cần xây dựng trước các bảng quản lý và bảng sản phẩm cũng nằm trong số đó.
+-	Như trong bảng đã phân tích, trong bảng products có id địa chỉ làm khóa chính.
+-	Có các thuộc tính như:
+-Name: Tên sản phẩm (kiểu VarChar [255])
+-Original price: giá gốc hay là giá ban đầu trước khi được giảm giá hoặc khuyến mãi (có kiểu DECIMAl (10,10))
+-PromotionPrice: Là giá khuyến mãi hoặc giá bán được giảm giá của 1 sản phẩm trong 1 thời gian giới hạn (có kiểu DECIMAl (10,10))
+-image: Là hình ảnh của các sản phẩm (kiểu varchar [255]).
+-createdby: Cho người dùng biết sản phẩm được tạo bởi ai (kiểu INT (11)).
+-createdDate: Cho người dùng biết sản phẩm được sản xuất vào ngày nào hay được gọi là HSD chúng ta hay thấy trên bao bì. (có kiểu DATE).
+-cateID: được viết tắt của “Category ID” nghĩa là mã số định danh cho một danh mục sản phẩm (Kiểu INT).
+-qty: được viết tắt cả “quantity” trong tiếng anh, có nghĩa là “số lượng”, cho biết số lượng sản phẩm hiện đang có hoặc số lượng sản phẩm đã bán được (kiểu INT)
+-des: được viết tắt của” description” - có nghĩa là mô tả chi tiết sản phẩm (tính năng, đặc điểm, cách sử dụng, kích thước, …..)( kiểu VarChar[1000]).
+-status: có nghĩa là trạng thái, nó được sử dụng để chỉ trạng thái của 1 đơn hàng (đang xử lý, đã vận chuyển, đã hoàn thành, ….) (kiểu TINYINT).
+-soldCound: là từ ghép của số lượng và đã bán, hay nghĩa của nó là số lượng đã bán, chỉ tổng sản phẩm đã bán được trong 1 khoảng thời gian cụ thể hoặc trên toàn bộ thời gian. ( Kiểu INT)
+
+
