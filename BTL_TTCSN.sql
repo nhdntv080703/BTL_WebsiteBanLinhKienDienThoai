@@ -1,10 +1,86 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 27, 2022 at 09:06 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `btl-ttcsn`
+-- Database: `hkt_shop`
 --
 
 -- --------------------------------------------------------
--- Cấu trúc bảng cho bảng `orders`
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `productName` varchar(100) NOT NULL,
+  `productPrice` decimal(10,0) NOT NULL,
+  `productImage` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `userId`, `productId`, `qty`, `productName`, `productPrice`, `productImage`) VALUES
+(57, 35, 44, 1, 'Đế điện thoại xe hơi Vent mount Pro With MagSafe Belkin WIC002btGR Bạc', '1590000', '4377426429.jpg'),
+(58, 35, 58, 1, 'Đế điện thoại xe hơi OSMIA CK-CH4 Xám', '120000', '6295923885.jpg'),
+(59, 35, 64, 1, 'Dây đeo điện thoại OSMIA silicon CRS ', '30000', '362dbff9ea.jpg'),
+(60, 35, 88, 1, 'Móc treo phích cắm JM HOOKWJM02', '40000', '8bfbae28f9.jpg'),
+(61, 35, 101, 1, 'Tai nghe Bluetooth AirPods 3 Apple MME73 Trắng', '4490000', '968abb4093.jpeg'),
+(62, 35, 98, 1, 'Túi chống nước 5 inch Cosano Trong suốt', '50000', 'e7f8e62c73.jpg'),
+(76, 1, 28, 1, 'Adapter Sạc USB Hydrus ACL2018', '100000', 'b52eabed75.jpeg'),
+(80, 2, 27, 20, 'Cáp Type C - Lightning 1m Apple MM0A3 Trắng', '501000', 'ac55bd19cb.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `status`) VALUES
+(6, 'Sạc dự phòng', 1),
+(7, 'Sạc, cáp', 1),
+(8, 'Gậy chụp ảnh, Gimbal', 1),
+(9, 'Giá đỡ điện thoại/ laptop', 1),
+(10, 'Đế, móc điện thoại', 1),
+(11, 'Túi chống nước', 1),
+(12, 'Tai nghe', 1),
+(13, 'Loa', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -16,7 +92,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`) VALUES
@@ -35,7 +111,9 @@ INSERT INTO `orders` (`id`, `userId`, `createdDate`, `receivedDate`, `status`) V
 (52, 2, '2022-06-27', '2022-06-27', 'Complete');
 
 -- --------------------------------------------------------
--- Cấu trúc bảng cho bảng `order_details`
+
+--
+-- Table structure for table `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -49,7 +127,7 @@ CREATE TABLE `order_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `order_details`
+-- Dumping data for table `order_details`
 --
 
 INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`, `productName`, `productImage`) VALUES
@@ -77,7 +155,9 @@ INSERT INTO `order_details` (`id`, `orderId`, `productId`, `qty`, `productPrice`
 (61, 52, 41, 1, '90000', 'Gậy Chụp Ảnh Xmobile Hình Stitch CSA004', 'ce2d8b2ae6.jpg');
 
 -- --------------------------------------------------------
--- Cấu trúc bảng cho bảng `products`
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -95,8 +175,8 @@ CREATE TABLE `products` (
   `soldCount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
----- --------------------------------------------------------
--- Đang đổ dữ liệu cho bảng `products`
+--
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`, `createdBy`, `createdDate`, `cateId`, `qty`, `des`, `status`, `soldCount`) VALUES
@@ -194,8 +274,9 @@ INSERT INTO `products` (`id`, `name`, `originalPrice`, `promotionPrice`, `image`
 (111, 'Loa Bluetooth JBL Clip 4 ', '1590000', '1430000', '73fa0fe74b.jpg', 1, '2022-06-27', 13, 100, '<b>Thông số kỹ thuật:</b> \r\n<br> - Tổng công suất: 5 W\r\n<br> - Nguồn: Pin\r\n<br> - Thời gian sử dụng: Dùng 8 - 10 tiếngSạc khoảng 3 tiếng\r\n<br> - Kết nối không dây: Bluetooth 5.1\r\n<br> - Tiện ích: Chống nước, chống bụi IP67\r\n<br> - Phím điều khiển: Bật / tắt nguồn, Bật/tắt bluetooth, Chuyển bài hát, Phát/dừng chơi nhạc, Tăng/giảm âm lượng\r\n<br> - Thương hiệu của: Mỹ\r\n<br> - Hãng JBL. ', 1, 0);
 
 -- --------------------------------------------------------
+
 --
--- Cấu trúc bảng cho bảng `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -204,7 +285,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
@@ -212,8 +293,9 @@ INSERT INTO `role` (`id`, `name`) VALUES
 (2, 'Normal');
 
 -- --------------------------------------------------------
+
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -229,8 +311,8 @@ CREATE TABLE `users` (
   `captcha` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
----- --------------------------------------------------------
--- Đang đổ dữ liệu cho bảng `users`
+--
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `fullname`, `dob`, `password`, `role_id`, `status`, `address`, `isConfirmed`, `captcha`) VALUES
@@ -239,109 +321,136 @@ INSERT INTO `users` (`id`, `email`, `fullname`, `dob`, `password`, `role_id`, `s
 (35, 'huong@gmail.com', 'Chu Bá Hưởng', '2001-11-30', '0cc175b9c0f1b6a831c399e269772661', 2, 1, 'Minh Khai, Bắc Từ Liêm, Hà Nội', 1, '87909');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
+--
 
--- --------------------------------------------------------
--- Chỉ mục cho bảng `orders`
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`userId`),
+  ADD KEY `product_id` (`productId`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`userId`);
 
----- --------------------------------------------------------
--- Chỉ mục cho bảng `order_details`
+--
+-- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`orderId`),
   ADD KEY `product_id` (`productId`);
 
----- --------------------------------------------------------
--- Chỉ mục cho bảng `products`
+--
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cate_id` (`cateId`);
 
----- --------------------------------------------------------
--- Chỉ mục cho bảng `role`
+--
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
----- --------------------------------------------------------
--- Chỉ mục cho bảng `users`
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `chatbot`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `chatbot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
--- AUTO_INCREMENT cho bảng `orders`
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT cho bảng `order_details`
+-- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
--- AUTO_INCREMENT cho bảng `role`
+-- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `cart`
 --
--- Các ràng buộc cho bảng `orders`
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `order_details`
+-- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`);
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`cateId`) REFERENCES `categories` (`id`);
 
 --
--- Các ràng buộc cho bảng `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
